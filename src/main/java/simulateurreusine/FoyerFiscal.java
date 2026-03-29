@@ -3,62 +3,62 @@ package simulateurreusine;
 import Calculateur.SituationFamiliale;
 
 /**
- * Contient toutes les données décrivant le foyer fiscal.
- * Transmis en entrée à chaque calculateur.
+ * Contient toutes les données décrivant le foyer fiscal. Transmis en entrée à
+ * chaque calculateur.
  */
 public class FoyerFiscal {
 
-    private int revenuNet;
-    private SituationFamiliale situationFamiliale;
-    private int nbEnfants;
-    private int nbEnfantsHandicapes;
-    private boolean parentIsole;
+	private int revenuNet;
+	private SituationFamiliale situationFamiliale;
+	private int nbEnfants;
+	private int nbEnfantsHandicapes;
+	private boolean parentIsole;
 
-    // -------------------------------------------------------------------------
-    // Setters
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Setters
+	// -------------------------------------------------------------------------
 
-    public void setRevenuNet(int revenuNet) {
-        this.revenuNet = revenuNet;
-    }
+	public void setRevenuNet(int revenuNet) {
+		this.revenuNet = revenuNet;
+	}
 
-    public void setSituationFamiliale(SituationFamiliale situationFamiliale) {
-        this.situationFamiliale = situationFamiliale;
-    }
+	public void setSituationFamiliale(SituationFamiliale situationFamiliale) {
+		this.situationFamiliale = situationFamiliale;
+	}
 
-    public void setNbEnfants(int nbEnfants) {
-        this.nbEnfants = nbEnfants;
-    }
+	public void setNbEnfants(int nbEnfants) {
+		this.nbEnfants = nbEnfants;
+	}
 
-    public void setNbEnfantsHandicapes(int nbEnfantsHandicapes) {
-        this.nbEnfantsHandicapes = nbEnfantsHandicapes;
-    }
+	public void setNbEnfantsHandicapes(int nbEnfantsHandicapes) {
+		this.nbEnfantsHandicapes = nbEnfantsHandicapes;
+	}
 
-    public void setParentIsole(boolean parentIsole) {
-        this.parentIsole = parentIsole;
-    }
+	public void setParentIsole(boolean parentIsole) {
+		this.parentIsole = parentIsole;
+	}
 
-    // -------------------------------------------------------------------------
-    // Getters
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Getters
+	// -------------------------------------------------------------------------
 
-    public int getRevenuNet() {
-        return revenuNet;
-    }
+	public int getRevenuNet() {
+		return revenuNet;
+	}
 
-    public SituationFamiliale getSituationFamiliale() {
-        return situationFamiliale;
-    }
+	public SituationFamiliale getSituationFamiliale() {
+		return situationFamiliale;
+	}
 
-    public int getNbEnfants() {
-        return nbEnfants;
-    }
+	public int getNbEnfants() {
+		return nbEnfants;
+	}
 
-    public int getNbEnfantsHandicapes() {
-        return nbEnfantsHandicapes;
-    }
+	public int getNbEnfantsHandicapes() {
+		return nbEnfantsHandicapes;
+	}
 
-    public boolean isParentIsole() {
-        return parentIsole;
-    }
+	public boolean isParentIsole() {
+		return parentIsole;
+	}
 }

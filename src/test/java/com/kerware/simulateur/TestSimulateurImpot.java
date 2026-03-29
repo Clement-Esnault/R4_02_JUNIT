@@ -39,8 +39,10 @@ class TestSimulateurImpot {
 	public static final int CODE_REUSINE = 2;
 
 	/** Code actuellement testé — modifier pour basculer d'implémentation. */
-	public static final int TYPE_CODE = CODE_HERITE;
+	public static final int TYPE_CODE = CODE_REUSINE;
 
+	private ICalculateurImpot calculateurImpot;
+	
 	@DisplayName("Sélection de l'implémentation testée")
 	@BeforeEach
 	void setCalculateurImpot() {
@@ -52,7 +54,7 @@ class TestSimulateurImpot {
 	}
 
 	/** Calculateur partagé par tous les tests de la classe. */
-	private  ICalculateurImpot calculateurImpot;
+	
 
 	// -------------------------------------------------------------------------
 	// Revenus utilisés dans les tests (en euros)
@@ -334,17 +336,16 @@ class TestSimulateurImpot {
 		assertEquals(DECOTE_CELIB_20K, calculateurImpot.getDecote());
 		assertEquals(IMPOT_CELIB_20K_APRES_DECOTE, calculateurImpot.getImpotSurRevenuNet());
 	}
-	
+
 	/** EXG-016 : application de la décote (couple marié). */
 	@Test
 	@DisplayName("EXG-016 : application de la décote (couple marié)")
 	void testDecoteCouple() {
-	    configurer(REVENU_FAIBLE, SituationFamiliale.MARIE, 0, 0, false);
+		configurer(REVENU_FAIBLE, SituationFamiliale.MARIE, 0, 0, false);
 
-
-	    // Le couple bénéficie d'un seuil de décote plus élevé qu'un célibataire
-	    assertTrue(calculateurImpot.getDecote() == 0);
-	    assertTrue(calculateurImpot.getImpotSurRevenuNet() == 0);
+		// Le couple bénéficie d'un seuil de décote plus élevé qu'un célibataire
+		assertTrue(calculateurImpot.getDecote() == 0);
+		assertTrue(calculateurImpot.getImpotSurRevenuNet() == 0);
 	}
 
 	/** EXG-017 : un marié paie moins d'impôt qu'un célibataire à revenus égaux. */
@@ -362,19 +363,19 @@ class TestSimulateurImpot {
 
 	/** EXG-018 : avoir des enfants réduit l'impôt d'un couple. */
 	private static final int IMPOT_MARIE_60K_SANS_ENF = 3455;
-	private static final int IMPOT_MARIE_60K_2ENF     = 1770;
+	private static final int IMPOT_MARIE_60K_2ENF = 1770;
+
 	@Test
 	@DisplayName("EXG-018 : impact des parts enfants")
 
 	void testEnfantsReduisentImpot() {
-	    configurer(REVENU_CONFORTABLE, SituationFamiliale.MARIE, 0, 0, false);
-	    assertEquals(IMPOT_MARIE_60K_SANS_ENF, calculateurImpot.getImpotSurRevenuNet());
+		configurer(REVENU_CONFORTABLE, SituationFamiliale.MARIE, 0, 0, false);
+		assertEquals(IMPOT_MARIE_60K_SANS_ENF, calculateurImpot.getImpotSurRevenuNet());
 
-	    configurer(REVENU_CONFORTABLE, SituationFamiliale.MARIE, 2, 0, false);
-	    assertEquals(IMPOT_MARIE_60K_2ENF, calculateurImpot.getImpotSurRevenuNet());
+		configurer(REVENU_CONFORTABLE, SituationFamiliale.MARIE, 2, 0, false);
+		assertEquals(IMPOT_MARIE_60K_2ENF, calculateurImpot.getImpotSurRevenuNet());
 
-
-	    assertTrue(IMPOT_MARIE_60K_2ENF < IMPOT_MARIE_60K_SANS_ENF);
+		assertTrue(IMPOT_MARIE_60K_2ENF < IMPOT_MARIE_60K_SANS_ENF);
 	}
 
 	/** EXG-019 : l'impôt est toujours nul ou positif (jamais négatif). */
