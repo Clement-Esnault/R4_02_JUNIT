@@ -6,7 +6,7 @@ package simulateurreusine;
  * La décote est appliquée lorsque l'impôt avant décote est inférieur au seuil
  * propre au type de foyer (seul ou couple).
  */
-public class CalculateurDecote {
+public final class CalculateurDecote {
 
 	private static final double SEUIL_DECOTE_SEUL = 1929.0;
 	private static final double SEUIL_DECOTE_COUPLE = 3191.0;
@@ -29,9 +29,12 @@ public class CalculateurDecote {
 		double seuilDecote = estCouple ? SEUIL_DECOTE_COUPLE : SEUIL_DECOTE_SEUL;
 		double decoteMax = estCouple ? DECOTE_MAX_COUPLE : DECOTE_MAX_SEUL;
 
-		decote = (impotAvantDecote < seuilDecote)
-				? Math.min(Math.round(decoteMax - impotAvantDecote * TAUX_DECOTE), impotAvantDecote)
-				: 0.0;
+		if (impotAvantDecote < seuilDecote) {
+			double decoteBrute = Math.round(decoteMax - impotAvantDecote * TAUX_DECOTE);
+			decote = Math.min(decoteBrute, impotAvantDecote);
+		} else {
+			decote = 0.0;
+		}
 		impotNet = Math.round(impotAvantDecote - decote);
 	}
 

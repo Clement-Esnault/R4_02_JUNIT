@@ -6,7 +6,7 @@ import Calculateur.SituationFamiliale;
  * Contient toutes les données décrivant le foyer fiscal. Transmis en entrée à
  * chaque calculateur.
  */
-public class FoyerFiscal {
+public final class FoyerFiscal {
 
 	private int revenuNet;
 	private SituationFamiliale situationFamiliale;
@@ -18,24 +18,24 @@ public class FoyerFiscal {
 	// Setters
 	// -------------------------------------------------------------------------
 
-	public void setRevenuNet(int revenuNet) {
-		this.revenuNet = revenuNet;
+	public void setRevenuNet(int valeur) {
+		this.revenuNet = valeur;
 	}
 
-	public void setSituationFamiliale(SituationFamiliale situationFamiliale) {
-		this.situationFamiliale = situationFamiliale;
+	public void setSituationFamiliale(SituationFamiliale valeur) {
+		this.situationFamiliale = valeur;
 	}
 
-	public void setNbEnfants(int nbEnfants) {
-		this.nbEnfants = nbEnfants;
+	public void setNbEnfants(int valeur) {
+		this.nbEnfants = valeur;
 	}
 
-	public void setNbEnfantsHandicapes(int nbEnfantsHandicapes) {
-		this.nbEnfantsHandicapes = nbEnfantsHandicapes;
+	public void setNbEnfantsHandicapes(int valeur) {
+		this.nbEnfantsHandicapes = valeur;
 	}
 
-	public void setParentIsole(boolean parentIsole) {
-		this.parentIsole = parentIsole;
+	public void setParentIsole(boolean valeur) {
+		this.parentIsole = valeur;
 	}
 
 	// -------------------------------------------------------------------------

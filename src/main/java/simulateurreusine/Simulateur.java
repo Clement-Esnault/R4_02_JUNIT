@@ -18,7 +18,8 @@ public final class Simulateur {
 	private final CalculateurAbattement calculateurAbattement = new CalculateurAbattement();
 	private final CalculateurQuotient calculateurQuotient = new CalculateurQuotient();
 	private final CalculateurBareme calculateurBareme = new CalculateurBareme();
-	private final CalculateurPlafonnement calculateurPlafonnement = new CalculateurPlafonnement();
+	private final CalculateurPlafonnement calculateurPlafonnement =
+			new CalculateurPlafonnement();
 	private final CalculateurDecote calculateurDecote = new CalculateurDecote();
 
 	// -------------------------------------------------------------------------
@@ -58,7 +59,8 @@ public final class Simulateur {
 	 */
 	public void calculImpotSurRevenuNet() {
 		if (foyer.getSituationFamiliale() == null) {
-			throw new IllegalArgumentException("La situation familiale doit être renseignée.");
+			String msg = "La situation familiale doit être renseignée.";
+			throw new IllegalArgumentException(msg);
 		}
 
 		// Étape 1 — abattement
@@ -68,18 +70,22 @@ public final class Simulateur {
 		calculateurQuotient.calculer(foyer);
 
 		// Étape 3 — barème progressif (deux calculs nécessaires pour le plafonnement)
-		double impotDeclarants = calculateurBareme.calculer(calculateurAbattement.getRevenuFiscalReference(),
-				calculateurQuotient.getNbPartsDeclarants());
+		int rfr = calculateurAbattement.getRevenuFiscalReference();
+		double impotDeclarants = calculateurBareme.calculer(
+				rfr, calculateurQuotient.getNbPartsDeclarants());
 
-		double impotFoyer = calculateurBareme.calculer(calculateurAbattement.getRevenuFiscalReference(),
-				calculateurQuotient.getNbPartsFoyerFiscal());
+		double impotFoyer = calculateurBareme.calculer(
+				rfr, calculateurQuotient.getNbPartsFoyerFiscal());
 
 		// Étape 4 — plafonnement du quotient familial
-		calculateurPlafonnement.calculer(impotDeclarants, impotFoyer, calculateurQuotient.getNbPartsDeclarants(),
+		calculateurPlafonnement.calculer(
+				impotDeclarants, impotFoyer,
+				calculateurQuotient.getNbPartsDeclarants(),
 				calculateurQuotient.getNbPartsFoyerFiscal());
 
 		// Étape 5 — décote
-		calculateurDecote.calculer(calculateurPlafonnement.getImpotAvantDecote(),
+		calculateurDecote.calculer(
+				calculateurPlafonnement.getImpotAvantDecote(),
 				calculateurQuotient.getNbPartsDeclarants());
 	}
 

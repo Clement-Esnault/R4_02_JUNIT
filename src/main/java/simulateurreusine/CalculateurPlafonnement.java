@@ -6,9 +6,10 @@ package simulateurreusine;
  * L'avantage fiscal procuré par les parts supplémentaires (enfants,
  * majorations) est plafonné à {@code PLAFOND_DEMI_PART} euros par demi-part.
  */
-public class CalculateurPlafonnement {
+public final class CalculateurPlafonnement {
 
 	private static final double PLAFOND_DEMI_PART = 1759.0;
+	private static final double VALEUR_DEMI_PART = 0.5;
 
 	// Résultat
 	private double impotAvantDecote;
@@ -23,9 +24,11 @@ public class CalculateurPlafonnement {
 	 * @param nbPartsDeclarants nombre de parts des déclarants (1 ou 2)
 	 * @param nbPartsFoyer      nombre total de parts du foyer fiscal
 	 */
-	public void calculer(double impotDeclarants, double impotFoyer, double nbPartsDeclarants, double nbPartsFoyer) {
+	public void calculer(
+			double impotDeclarants, double impotFoyer,
+			double nbPartsDeclarants, double nbPartsFoyer) {
 		double demiPartsSup = nbPartsFoyer - nbPartsDeclarants;
-		double plafond = (demiPartsSup / 0.5) * PLAFOND_DEMI_PART;
+		double plafond = (demiPartsSup / VALEUR_DEMI_PART) * PLAFOND_DEMI_PART;
 		double reduction = impotDeclarants - impotFoyer;
 		impotAvantDecote = (reduction > plafond) ? impotDeclarants - plafond : impotFoyer;
 	}

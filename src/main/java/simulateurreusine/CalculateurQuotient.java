@@ -6,7 +6,9 @@ import Calculateur.SituationFamiliale;
  * Étape 2 — Calcule le nombre de parts du foyer fiscal (déclarants + enfants +
  * majorations).
  */
-public class CalculateurQuotient {
+public final class CalculateurQuotient {
+
+	private static final double VALEUR_DEMI_PART = 0.5;
 
 	// Résultats
 	private double nbPartsDeclarants;
@@ -19,7 +21,8 @@ public class CalculateurQuotient {
 	 */
 	public void calculer(FoyerFiscal foyer) {
 		nbPartsDeclarants = partsDeclarants(foyer.getSituationFamiliale());
-		nbPartsFoyerFiscal = nbPartsDeclarants + partsEnfants(foyer.getNbEnfants())
+		nbPartsFoyerFiscal = nbPartsDeclarants
+				+ partsEnfants(foyer.getNbEnfants())
 				+ partsMajorationParentIsole(foyer.isParentIsole(), foyer.getNbEnfants())
 				+ partsEnfantsHandicapes(foyer.getNbEnfantsHandicapes(), foyer.getNbEnfants());
 	}
@@ -39,18 +42,18 @@ public class CalculateurQuotient {
 	/** 0,5 part par enfant jusqu'au 2e, 1 part entière à partir du 3e. */
 	private double partsEnfants(int nbEnfants) {
 		int n = Math.max(nbEnfants, 0); // ERR-02 : valeur négative → 0
-		return (n <= 2) ? n * 0.5 : 1.0 + (n - 2);
+		return (n <= 2) ? n * VALEUR_DEMI_PART : 1.0 + (n - 2);
 	}
 
 	/** +0,5 part si parent isolé avec au moins 1 enfant. */
 	private double partsMajorationParentIsole(boolean parentIsole, int nbEnfants) {
-		return (parentIsole && Math.max(nbEnfants, 0) > 0) ? 0.5 : 0.0;
+		return (parentIsole && Math.max(nbEnfants, 0) > 0) ? VALEUR_DEMI_PART : 0.0;
 	}
 
 	/** +0,5 part par enfant handicapé, plafonné au nombre d'enfants réels. */
 	private double partsEnfantsHandicapes(int nbHandicapes, int nbEnfants) {
 		int n = Math.min(Math.max(nbHandicapes, 0), Math.max(nbEnfants, 0)); // ERR-03
-		return n * 0.5;
+		return n * VALEUR_DEMI_PART;
 	}
 
 	// -------------------------------------------------------------------------

@@ -4,7 +4,7 @@ import Calculateur.SituationFamiliale;
 
 import Calculateur.ICalculateurImpot;
 
-public class AdaptateurCodeReusine implements ICalculateurImpot {
+public final class AdaptateurCodeReusine implements ICalculateurImpot {
 
 	private Simulateur simulateurReusine = new Simulateur();
 

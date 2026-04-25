@@ -4,7 +4,7 @@ package simulateurreusine;
  * Étape 1 — Calcule l'abattement forfaitaire de 10 % et le revenu fiscal de
  * référence.
  */
-public class CalculateurAbattement {
+public final class CalculateurAbattement {
 
 	private static final double TAUX_ABATTEMENT = 0.10;
 	private static final int ABATTEMENT_MINIMUM = 495;
@@ -20,9 +20,10 @@ public class CalculateurAbattement {
 	 * @param foyer le foyer fiscal (revenu net)
 	 */
 	public void calculer(FoyerFiscal foyer) {
-		int revenuEffectif = Math.max(foyer.getRevenuNet(), 0); // ERR-04 : revenu négatif → 0
+		int revenuEffectif = Math.max(foyer.getRevenuNet(), 0); 
 		double abattementBrut = revenuEffectif * TAUX_ABATTEMENT;
-		abattement = (int) Math.min(Math.max(abattementBrut, ABATTEMENT_MINIMUM), ABATTEMENT_MAXIMUM);
+		double abattementBorne = Math.max(abattementBrut, ABATTEMENT_MINIMUM);
+		abattement = (int) Math.min(abattementBorne, ABATTEMENT_MAXIMUM);
 		revenuFiscalReference = Math.max(revenuEffectif - abattement, 0);
 	}
 

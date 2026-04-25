@@ -125,7 +125,7 @@ public class Simulateur {
 			} else {
 				nbPtsDecl = 2;
 			}
-			nbPtsDecl = 1;
+			//nbPtsDecl = 1;
 			break;
 		}
 
